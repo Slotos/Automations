@@ -165,7 +165,7 @@ module XDo
       #. 
       def wheel(dir, amount)
         check_for_deprecation dir
-        amount.times{click(nil, nil, dir)}
+        click(nil, nil, dir, nil, nil, amount)
       end
 
       #Holds a mouse button down. Don't forget to release it some time. 
