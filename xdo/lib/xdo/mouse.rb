@@ -129,12 +129,20 @@ module XDo
       #  XDo::Mouse.click(10, 10, :right, 10)
       #  #Directly set the cursor to (10|10) and click with the middle mouse button
       #  XDo::Mouse.click(10, 10, :middle, 1, true)
-      def click(x = nil, y = nil, button = :left, speed = 1, set = false)
+      def click(x = nil, y = nil, button = :left, speed = 1, set = false, repeat = nil, delay = nil)
         check_for_deprecation button
         if x and y
           move(x, y, speed, set)
         end
-        `#{XDOTOOL} click #{BUTTON2XDOTOOL[button]}`
+        if repeat
+          if delay
+            `#{XDOTOOL} click --repeat #{repeat} --delay #{delay} #{BUTTON2XDOTOOL[button]}`
+          else
+            `#{XDOTOOL} click --repeat #{repeat} #{BUTTON2XDOTOOL[button]}`
+          end
+        else
+          `#{XDOTOOL} click #{BUTTON2XDOTOOL[button]}`
+        end
       end
 
       #Scroll with the mouse wheel. +amount+ is the time of steps to scroll. 
