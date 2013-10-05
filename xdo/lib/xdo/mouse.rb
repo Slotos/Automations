@@ -39,7 +39,7 @@ module XDo
       #===Example
       #  p XDo::Mouse.position #=> [12, 326]
       def position
-        out = `#{XDOTOOL} getmouselocation`.match(/x:(\d+) y:(\d+)/)
+        `#{XDOTOOL} getmouselocation`.match(/x:(\d+) y:(\d+)/)
         [$1.to_i, $2.to_i]
       end
 
